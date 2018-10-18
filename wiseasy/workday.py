@@ -15,7 +15,7 @@ def __wiseasy_workday_diff__(date,diff=1):
         dateTime=date
     elif isinstance(date, str):
         try:
-            dateTime=datetime.datetime.strftime(date,'%Y-%m-%d')
+            dateTime=datetime.datetime.strptime(date,'%Y-%m-%d')
         except:
             print traceback.format_exc()
     else:
@@ -37,7 +37,7 @@ def __wiseasy_workday__(date):
         dateTime=date
     elif isinstance(date, str):
         try:
-            dateTime=datetime.datetime.strftime(date,'%Y-%m-%d')
+            dateTime=datetime.datetime.strptime(date,'%Y-%m-%d')
         except:
             print traceback.format_exc()
     else:
