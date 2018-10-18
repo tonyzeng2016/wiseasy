@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#encoding=utf-8
 from setuptools import setup
 
 version = "0.0.1"

@@ -6,6 +6,20 @@ u'''
 '''
 from __future__ import division
 import numpy as np
+
+def complementary_groupby(dataframe,bys,aggdict,as_index=False):
+    dataframe=dataframe.copy()
+    columns=dataframe.columns
+    for by in bys:
+        if by not in columns:dataframe[by]=u''
+        else:
+            if dataframe.dtypes[by]==np.float or dataframe.dtypes[by]==np.int:
+                dataframe.loc[dataframe[by].isnull(),by]=0
+            else:
+                dataframe.loc[dataframe[by].isnull(),by]=u''
+    result_item_fee=dataframe.groupby(bys,as_index=as_index).agg(aggdict)
+    return result_item_fee
+
 def __round__(number,ndigits=0):
     u'''
     四舍五入指定位数

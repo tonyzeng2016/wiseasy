@@ -7,22 +7,19 @@ u'''
 from __future__ import division
 import numpy as np
 import datetime
-def __wiseasy_workday_diff__(dateTime,diff=1):
+import traceback
+def __wiseasy_workday_diff__(date,diff=1):
     u'''
-    2018-06-20
-    某日的前num工作日:
-    /wiseasy/workday/diff/?day=xxxx&num=xxxx
-    
-    day必须,不包括改日
-    num可选,默认为1
-    
-    返回结果:{flag:xx,workday:xxx}
-    flag
-    0--正确
-    2--格式错误
-    1--参数不存在
-    3--找不到工作日错误
     '''
+    if isinstance(date, datetime.datetime):
+        dateTime=date
+    elif isinstance(date, str):
+        try:
+            dateTime=datetime.datetime.strftime(date,'%Y-%m-%d')
+        except:
+            print traceback.format_exc()
+    else:
+        raise NotImplementedError()
     counter=0
         
     diff=1 if diff==0 else diff
@@ -35,7 +32,17 @@ def __wiseasy_workday_diff__(dateTime,diff=1):
         #print i,currentDte,isworkday,counter
         if counter>=np.abs(diff):return currentDte
     return
-def __wiseasy_workday__(dateTime):
+def __wiseasy_workday__(date):
+    if isinstance(date, datetime.datetime):
+        dateTime=date
+    elif isinstance(date, str):
+        try:
+            dateTime=datetime.datetime.strftime(date,'%Y-%m-%d')
+        except:
+            print traceback.format_exc()
+    else:
+        raise NotImplementedError()
+    
     offdays={u'元旦':{u'begin':u'2017-12-30',u'end':u'2018-01-01'},
             u'春节':{u'begin':u'2018-02-15',u'end':u'2018-02-21'},
             u'清明节':{u'begin':u'2018-04-05',u'end':u'2018-04-07'},
