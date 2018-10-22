@@ -14,6 +14,7 @@ setup(
         "pandas","numpy"
     ],
     packages=['wiseasy'],
+    include_package_data=True,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python :: 2',
