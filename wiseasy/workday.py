@@ -8,6 +8,7 @@ from __future__ import division
 import numpy as np
 import datetime
 import traceback
+target_years=[2018,2019]
 def __wiseasy_workday_diff__(date,diff=1):
     u'''
     '''
@@ -20,14 +21,13 @@ def __wiseasy_workday_diff__(date,diff=1):
             print traceback.format_exc()
     else:
         raise NotImplementedError()
-    counter=0
-        
-    diff=1 if diff==0 else diff
-    flag=-1 if diff<0 else 1
+    counter=-1 if diff==0  or __wiseasy_workday__(dateTime) else 0
     
-    for i in range(1,np.abs(diff)+30):
+    flag=-1 if diff<0  else 1
+    
+    for i in range(0,np.abs(diff)+30):
         currentDte=dateTime+datetime.timedelta(days=i*flag)
-        isworkday=__wiseasy_workday__(currentDte) if currentDte.year in [2018,2019] else False
+        isworkday=__wiseasy_workday__(currentDte) if currentDte.year in target_years else False
         if isworkday:counter+=1
         #print i,currentDte,isworkday,counter
         if counter>=np.abs(diff):return currentDte
@@ -65,7 +65,7 @@ def __wiseasy_workday__(date):
             u'劳动节':[u'2018-04-28'],
             u'国庆节':[u'2018-09-29',u'2018-09-30',u'2019-09-29',u'2019-10-12']
             }
-    if dateTime.year not in [2018,2019]:return False
+    if dateTime.year not in target_years:return False
     (_,_,day)=dateTime.isocalendar()
     
     for _,v in offdays.iteritems():
