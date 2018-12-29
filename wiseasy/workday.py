@@ -12,8 +12,10 @@ target_years=[2018,2019]
 def __wiseasy_workday_diff__(date,diff=1):
     u'''
     '''
-    if isinstance(date, datetime.datetime):
-        dateTime=date
+    if isinstance(date, datetime.datetime) or isinstance(date, datetime.date):
+        dateTime=datetime.datetime(date.year,date.month,date.day)
+#     if isinstance(date, datetime.datetime):
+#         dateTime=date
     elif isinstance(date, str):
         try:
             dateTime=datetime.datetime.strptime(date,'%Y-%m-%d')
@@ -33,8 +35,8 @@ def __wiseasy_workday_diff__(date,diff=1):
         if counter>=np.abs(diff):return currentDte
     return
 def __wiseasy_workday__(date):
-    if isinstance(date, datetime.datetime):
-        dateTime=date
+    if isinstance(date, datetime.datetime) or isinstance(date, datetime.date):
+        dateTime=datetime.datetime(date.year,date.month,date.day)
     elif isinstance(date, str):
         try:
             dateTime=datetime.datetime.strptime(date,'%Y-%m-%d')
